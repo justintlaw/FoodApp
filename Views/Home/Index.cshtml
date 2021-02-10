@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Top Restaurants";
+}
+
+@model IEnumerable<Shop>
+
+<div class="text-center">
+    <div class="jumbotron">
+        <h1>Top Provo Restaurants</h1>
+        <p>A list of the top 5 restaurants in Provo. Feel free to make a suggestion!</p>
+    </div>
+
+    <div class="card-deck">
+        @foreach (Shop item in Model)
+        {
+            <div class="card bg-light">
+                <div class="card-body text-left">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center">Rank: @item.rank</li>
+                        <li class="list-group-item">Name: @item.name</li>
+                        <li class="list-group-item">Favorite Dish: @item.favDish</li>
+                        <li class="list-group-item">Address: @item.address</li>
+                        <li class="list-group-item">Phone Number: @(item.phoneNumber == null ? "N/A" : item.phoneNumber)</li>
+                        @if (item.websiteLink != null && item.websiteLink != "Coming soon.")
+                        {
+                            <li class="list-group-item">Website Link: <a href="@item.websiteLink">@item.websiteLink</a></li>
+                        }
+                        else if (item.websiteLink == "Coming soon.")
+                        {
+                            <li class="list-group-item">Website Link: @item.websiteLink</li>
+                        }
+                        else
+                        {
+                            <li class="list-group-item">Website Link: N/A</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
